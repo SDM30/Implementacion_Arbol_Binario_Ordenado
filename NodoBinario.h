@@ -18,6 +18,7 @@ public:
   void fijarHijoDer(NodoBinario<T> *der);
   bool esHoja();
   int altura();
+  void inOrden();
 };
 
 #include "NodoBinario.hxx"

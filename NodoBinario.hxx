@@ -37,7 +37,7 @@ bool NodoBinario<T>::esHoja(){
 
 template< class T >
 int NodoBinario<T>::altura(){
-    
+
     int valAlt;
     if (this->esHoja()){
         valAlt = 0;
@@ -59,4 +59,13 @@ int NodoBinario<T>::altura(){
     }
 
     return valAlt;
+}
+
+template < class T >
+void NodoBinario<T>::inOrden(){
+    if (this->hijoIzq() != NULL)
+        (this->hijoIzq())->inOrden();
+    std::cout<<this->dato<<std::" ";
+    if (this->hijoDer() != NULL)
+        (this->hijoDer())->inOrden();
 }
