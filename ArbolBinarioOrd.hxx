@@ -127,8 +127,8 @@ bool ArbolBinarioOrd<T>::eliminar(T &val){
                     padre->fijarHijoIzq(NULL);
                 }
             }
-            delete nodo;
-            return true;
+            
+            eliminado = true;
         }
         //2. Nodo con un solo hijo
         else if (nodo->obtenerHijoIzq() == NULL && nodo->obtenerHijoDer() != NULL){
