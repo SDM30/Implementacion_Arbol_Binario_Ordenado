@@ -1,4 +1,5 @@
 #include "ArbolBinarioOrd.h"
+
 template < class T >
 ArbolBinarioOrd<T>::ArbolBinarioOrd(){
     this->raiz = NULL;
@@ -24,7 +25,11 @@ T& ArbolBinarioOrd<T>::datoRaiz(){
 //Recursiva
 template < class T >
 int ArbolBinarioOrd<T>::altura(){
-
+    if (this->esVacio()){
+        return -1;
+    } else {  
+        return (this->raiz)->altura();
+    }
 }
 
 //Recursiva
