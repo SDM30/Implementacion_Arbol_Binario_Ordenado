@@ -23,6 +23,7 @@ template <class T> class NodoBinario {
     void preOrden();
     void posOrden();
     void inOrden();
+    NodoBinario<T> *obtenerMaximo();
 };
 
 #include "NodoBinario.hxx"

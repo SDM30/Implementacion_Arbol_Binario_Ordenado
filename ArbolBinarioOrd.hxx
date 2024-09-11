@@ -95,41 +95,88 @@ bool ArbolBinarioOrd<T>::eliminar(T &val){
 
     NodoBinario<T>* padre = this->raiz;
     NodoBinario<T>* nodo = this->raiz;
-    bool encontrado = buscar(val);
+    bool encontrado = false;
     bool eliminado = false;
-    std::cout<<"PENDIENTE"<<std::endl;
     //Comparar con dato en nodo para bajar por izq o der
     //y para saber si val esta en el arbol
     while (nodo != NULL && !encontrado){
-        padre = nodo;
         if (val < nodo->obtenerDato()) {
+            padre = nodo;
             nodo = nodo->obtenerHijoIzq();
         } else if (val > nodo->obtenerDato()) {
+            padre = nodo;
             nodo = nodo->obtenerHijoDer();
+        } else if (val == nodo->obtenerDato()) {
+            encontrado = true;
         }
     }
     //Si val esta en el arbol
     if(encontrado) {
         //Verificar caso de eliminacion
-        if (nodo->obtenerHijoIzq == NULL && nodo->obtenerHijoDer == NULL){
+        if (nodo->obtenerHijoIzq() == NULL && nodo->obtenerHijoDer() == NULL){
             //1. Nodo hoja (borrar)
+            if (nodo->obtenerDato() == (this->raiz)->obtenerDato()){
+                this->raiz = NULL;
+            } else {
+                // Verificar si es el hijo derecho del padre (y que no sea NULL)
+                if (padre->obtenerHijoDer() == nodo) {
+                    padre->fijarHijoDer(NULL);
+                } 
+                // Verificar si es el hijo izquierdo del padre (y que no sea NULL)
+                else if (padre->obtenerHijoIzq() == nodo) {
+                    padre->fijarHijoIzq(NULL);
+                }
+            }
             delete nodo;
+            return true;
         }
-        
         //2. Nodo con un solo hijo
-        if (nodo->obtenerHijoIzq == NULL && nodo->obtenerHijoDer != NULL){
+        else if (nodo->obtenerHijoIzq() == NULL && nodo->obtenerHijoDer() != NULL){
             //Usar hijo para remplazar nodo
-            
-        }
+            if(nodo == this->raiz){
+                this->raiz = nodo->obtenerHijoDer();
+            } else {
+                if (padre->obtenerHijoDer() == nodo){
+                    padre->fijarHijoDer(nodo->obtenerHijoDer());
+                } else {
+                    padre->fijarHijoIzq(nodo->obtenerHijoDer()); 
+                }
+            }
 
-        if (nodo->obtenerHijoIzq != NULL && nodo->obtenerHijoDer != NULL){
+            eliminado = true;
+        }
+        else if (nodo->obtenerHijoIzq() != NULL && nodo->obtenerHijoDer() == NULL){
             //Usar hijo para remplazar nodo
+            if(nodo == this->raiz){
+                this->raiz = nodo->obtenerHijoIzq();
+            }else{
+                if (padre->obtenerHijoIzq() == nodo){
+                    padre->fijarHijoIzq(nodo->obtenerHijoIzq());
+                } else {
+                    padre->fijarHijoDer(nodo->obtenerHijoIzq());
+                }
+            }
+
+            eliminado = true;
         }  
-        
         //3. Nodo con dos hijos
-        //Usar maximo de sub arbol izq para remplazar nodo
+        else if (nodo->obtenerHijoIzq() != NULL && nodo->obtenerHijoDer() != NULL){
+            //Usar maximo de sub arbol izq para remplazar nodo
+            NodoBinario<T>* nodoMaxIzq = (nodo->obtenerHijoIzq())->obtenerMaximo();
+
+            if (nodoMaxIzq == padre->obtenerHijoDer()){
+                padre->fijarHijoDer(nodoMaxIzq);
+            } else {
+                padre->fijarHijoIzq(nodoMaxIzq);
+            }
+
+            delete nodoMaxIzq;
+            eliminado = true;
+        }
     }
 
+    if (eliminado)
+        delete nodo;
 
     return eliminado;
 }

@@ -60,12 +60,71 @@ int main() {
     std::cout << std::endl;
 
     // Eliminar un elemento
-    int eliminarVal = 30;
-    if (arbol.eliminar(eliminarVal)) {
-        std::cout << "Elemento " << eliminarVal << " eliminado del árbol." << std::endl;
+    // Mostrar el recorrido en inorden antes de la eliminación
+    std::cout << "Recorrido en inorden antes de la eliminación: ";
+    arbol.inOrden();
+    std::cout << std::endl;
+
+    // Eliminar un nodo hoja (por ejemplo, el 20)
+    int eliminarVal1 = 20;
+    if (arbol.eliminar(eliminarVal1)) {
+        std::cout << "Elemento " << eliminarVal1 << " eliminado del árbol." << std::endl;
     } else {
-        std::cout << "Elemento " << eliminarVal << " no pudo ser eliminado." << std::endl;
+        std::cout << "Elemento " << eliminarVal1 << " no pudo ser eliminado." << std::endl;
     }
+
+    // Mostrar el recorrido en inorden después de la primera eliminación
+    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal1 << ": ";
+    arbol.inOrden();
+    std::cout << std::endl;
+
+    // Eliminar un nodo con dos hijos (por ejemplo, el 30)
+    int eliminarVal2 = 30;
+    if (arbol.eliminar(eliminarVal2)) {
+        std::cout << "Elemento " << eliminarVal2 << " eliminado del árbol." << std::endl;
+    } else {
+        std::cout << "Elemento " << eliminarVal2 << " no pudo ser eliminado." << std::endl;
+    }
+
+    // Mostrar el recorrido en inorden después de la segunda eliminación
+    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal2 << ": ";
+    arbol.inOrden();
+    std::cout << std::endl;
+
+    //Volver a insertar 
+    arbol.insertar(val1);
+    arbol.insertar(val2);
+    arbol.insertar(val3);
+    arbol.insertar(val4);
+    arbol.insertar(val5);
+    // Mostrar el recorrido en inorden antes de la eliminación
+    std::cout << "Recorrido en inorden antes de la eliminación del nodo 30: ";
+    arbol.inOrden();
+    std::cout << std::endl;
+
+    // Eliminar un nodo con dos hijos (por ejemplo, el 30)
+    if (arbol.eliminar(eliminarVal2)) {
+        std::cout << "Elemento " << eliminarVal2 << " eliminado del árbol." << std::endl;
+    } else {
+        std::cout << "Elemento " << eliminarVal2 << " no pudo ser eliminado." << std::endl;
+    }
+
+    // Mostrar el recorrido en inorden después de eliminar el nodo 30
+    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal2 << ": ";
+    arbol.inOrden();
+    std::cout << std::endl;
+
+    // Eliminar un nodo hoja (por ejemplo, el 20)
+    if (arbol.eliminar(eliminarVal1)) {
+        std::cout << "Elemento " << eliminarVal1 << " eliminado del árbol." << std::endl;
+    } else {
+        std::cout << "Elemento " << eliminarVal1 << " no pudo ser eliminado." << std::endl;
+    }
+
+    // Mostrar el recorrido en inorden después de la segunda eliminación
+    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal1 << ": ";
+    arbol.inOrden();
+    std::cout << std::endl;
 
     return 0;
 }

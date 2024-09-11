@@ -107,3 +107,15 @@ void NodoBinario<T>::inOrden(){
     if (this->hijoDer != NULL)
         (this->hijoDer)->inOrden();
 }
+
+template < class T >
+NodoBinario<T>* NodoBinario<T>::obtenerMaximo(){
+    NodoBinario<T>* nodoActual = this;
+    
+    // Recorrer hacia la derecha hasta encontrar el nodo más grande
+    while (nodoActual->hijoDer != NULL) {
+        nodoActual = nodoActual->hijoDer;
+    }
+    
+    return nodoActual;
+}
