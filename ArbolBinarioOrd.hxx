@@ -95,18 +95,41 @@ bool ArbolBinarioOrd<T>::eliminar(T &val){
 
     NodoBinario<T>* padre = this->raiz;
     NodoBinario<T>* nodo = this->raiz;
+    bool encontrado = buscar(val);
     bool eliminado = false;
     std::cout<<"PENDIENTE"<<std::endl;
     //Comparar con dato en nodo para bajar por izq o der
     //y para saber si val esta en el arbol
-    
+    while (nodo != NULL && !encontrado){
+        padre = nodo;
+        if (val < nodo->obtenerDato()) {
+            nodo = nodo->obtenerHijoIzq();
+        } else if (val > nodo->obtenerDato()) {
+            nodo = nodo->obtenerHijoDer();
+        }
+    }
     //Si val esta en el arbol
-    //Verificar caso de eliminacion
-    //1. Nodo hoja (borrar)
-    //2. Nodo con un solo hijo
-    //Usar hijo para remplazar nodo
-    //3. Nodo con dos hijos
-    //Usar maximo de sub arbol izq para remplazar nodo
+    if(encontrado) {
+        //Verificar caso de eliminacion
+        if (nodo->obtenerHijoIzq == NULL && nodo->obtenerHijoDer == NULL){
+            //1. Nodo hoja (borrar)
+            delete nodo;
+        }
+        
+        //2. Nodo con un solo hijo
+        if (nodo->obtenerHijoIzq == NULL && nodo->obtenerHijoDer != NULL){
+            //Usar hijo para remplazar nodo
+            
+        }
+
+        if (nodo->obtenerHijoIzq != NULL && nodo->obtenerHijoDer != NULL){
+            //Usar hijo para remplazar nodo
+        }  
+        
+        //3. Nodo con dos hijos
+        //Usar maximo de sub arbol izq para remplazar nodo
+    }
+
 
     return eliminado;
 }
