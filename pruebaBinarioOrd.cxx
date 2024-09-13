@@ -1,130 +1,201 @@
 #include <iostream>
 #include "ArbolBinarioOrd.h"
 
+void pruebaEliminaciones();
+void pruebaCaso1Eliminacion();
+void pruebaCaso2Eliminacion();
+void pruebaCaso3Eliminacion();
+void probarBusquedaPostEliminacion(ArbolBinarioOrd<int>& arbol, int valor);
+void pruebaAlturaTamano();
+
 int main() {
-    // Crear el árbol binario ordenado
+
+    std::cout << "----Caso 1----" << std::endl;
+    pruebaCaso1Eliminacion();
+    std::cout << std::endl;
+
+    std::cout << "----Caso 2----" << std::endl;
+    pruebaCaso2Eliminacion();
+    std::cout << std::endl;
+
+    std::cout << "----Caso 3----" << std::endl;
+    pruebaCaso3Eliminacion();
+    std::cout << std::endl;
+
+    pruebaEliminaciones();
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "----Prueba de Altura y Tamaño----" << std::endl;
+    pruebaAlturaTamano();
+
+    return 0;
+}
+
+void pruebaEliminaciones() {
     ArbolBinarioOrd<int> arbol;
-
-    // Verificar si el árbol está vacío
-    if (arbol.esVacio()) {
-        std::cout << "El árbol está vacío." << std::endl;
-    } else {
-        std::cout << "El árbol no está vacío." << std::endl;
+    std::cout << "Insertando elementos en el árbol binario ordenado:" << std::endl;
+    int elementosInsertar[] = {7, 3, 20, 15, 25, 30, 5, 4, 6, 0, -3, 1};
+    for (int i = 0; i < 12; i++) {
+        std::cout << "Insertando " << elementosInsertar[i] << ": ";
+        arbol.insertar(elementosInsertar[i]);
+        arbol.nivelOrden();
+        std::cout << std::endl;
     }
 
-    // Insertar algunos elementos
-    int val1 = 50, val2 = 30, val3 = 70, val4 = 20, val5 = 40;
-    arbol.insertar(val1);
-    arbol.insertar(val2);
-    arbol.insertar(val3);
-    arbol.insertar(val4);
-    arbol.insertar(val5);
-
-    // Verificar si el árbol está vacío después de las inserciones
-    if (!arbol.esVacio()) {
-        std::cout << "El árbol no está vacío después de las inserciones." << std::endl;
-    }
-
-    // Mostrar el dato de la raíz
-    std::cout << "Dato en la raíz: " << arbol.datoRaiz() << std::endl;
-
-    // Mostrar la altura del árbol
-    std::cout << "Altura del árbol: " << arbol.altura() << std::endl;
-
-    // Mostrar el tamaño del árbol
-    std::cout << "Tamaño del árbol: " << arbol.tamano() << std::endl;
-
-    // Buscar un elemento
-    int buscarVal = 30;
-    if (arbol.buscar(buscarVal)) {
-        std::cout << "Elemento " << buscarVal << " encontrado en el árbol." << std::endl;
-    } else {
-        std::cout << "Elemento " << buscarVal << " no encontrado en el árbol." << std::endl;
-    }
-
-    // Recorridos del árbol
-    std::cout << "Recorrido en preorden: ";
+    // Recorridos
+    std::cout << "\nRecorrido en preorden: ";
     arbol.preOrden();
-    std::cout << std::endl;
-
-    std::cout << "Recorrido en inorden: ";
+    std::cout << "\nRecorrido en inorden: ";
     arbol.inOrden();
-    std::cout << std::endl;
-
-    std::cout << "Recorrido en posorden: ";
+    std::cout << "\nRecorrido en posorden: ";
     arbol.posOrden();
-    std::cout << std::endl;
-
-    std::cout << "Recorrido por niveles: ";
+    std::cout << "\nRecorrido en nivel-orden: ";
     arbol.nivelOrden();
     std::cout << std::endl;
 
-    // Eliminar un elemento
-    // Mostrar el recorrido en inorden antes de la eliminación
-    std::cout << "Recorrido en inorden antes de la eliminación: ";
-    arbol.inOrden();
-    std::cout << std::endl;
+    // Probar eliminación
+    std::cout << "\nEliminando elementos del árbol binario ordenado:" << std::endl;
 
-    // Eliminar un nodo hoja (por ejemplo, el 20)
-    int eliminarVal1 = 20;
-    if (arbol.eliminar(eliminarVal1)) {
-        std::cout << "Elemento " << eliminarVal1 << " eliminado del árbol." << std::endl;
-    } else {
-        std::cout << "Elemento " << eliminarVal1 << " no pudo ser eliminado." << std::endl;
+    int elementosEliminar[] = {15, 25, 3};  // casos de eliminación
+    for (int i = 0; i < 3; i++) {
+        std::cout << "Eliminando " << elementosEliminar[i] << ": ";
+        arbol.eliminar(elementosEliminar[i]);
+        arbol.nivelOrden();
+        std::cout << std::endl;
+        probarBusquedaPostEliminacion(arbol, elementosEliminar[i]);
     }
 
-    // Mostrar el recorrido en inorden después de la primera eliminación
-    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal1 << ": ";
-    arbol.inOrden();
-    std::cout << std::endl;
-
-    // Eliminar un nodo con dos hijos (por ejemplo, el 30)
-    int eliminarVal2 = 30;
-    if (arbol.eliminar(eliminarVal2)) {
-        std::cout << "Elemento " << eliminarVal2 << " eliminado del árbol." << std::endl;
-    } else {
-        std::cout << "Elemento " << eliminarVal2 << " no pudo ser eliminado." << std::endl;
+    // Reinserciones
+    std::cout << "\nReinsertando elementos en el árbol binario ordenado:" << std::endl;
+    for (int i = 0; i < 12; i++) {
+        std::cout << "Insertando " << elementosInsertar[i] << ": ";
+        arbol.insertar(elementosInsertar[i]);
+        arbol.nivelOrden();
+        std::cout << std::endl;
     }
 
-    // Mostrar el recorrido en inorden después de la segunda eliminación
-    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal2 << ": ";
-    arbol.inOrden();
+    // Recorrido final
+    std::cout << "\nÁrbol binario ordenado después de las reinserciones en nivel-orden: ";
+    arbol.nivelOrden();
     std::cout << std::endl;
+}
 
-    //Volver a insertar 
-    arbol.insertar(val1);
-    arbol.insertar(val2);
-    arbol.insertar(val3);
-    arbol.insertar(val4);
-    arbol.insertar(val5);
-    // Mostrar el recorrido en inorden antes de la eliminación
-    std::cout << "Recorrido en inorden antes de la eliminación del nodo 30: ";
-    arbol.inOrden();
-    std::cout << std::endl;
-
-    // Eliminar un nodo con dos hijos (por ejemplo, el 30)
-    if (arbol.eliminar(eliminarVal2)) {
-        std::cout << "Elemento " << eliminarVal2 << " eliminado del árbol." << std::endl;
-    } else {
-        std::cout << "Elemento " << eliminarVal2 << " no pudo ser eliminado." << std::endl;
+void pruebaCaso1Eliminacion() {
+    ArbolBinarioOrd<int> arbol;
+    std::cout << "Insertando elementos en el árbol binario ordenado:" << std::endl;
+    int elementosInsertar[] = {7, 3, 20, 15, 25, 30, 5, 4, 6, 0, -3, 1};
+    for (int i = 0; i < 12; i++) {
+        arbol.insertar(elementosInsertar[i]);
     }
 
-    // Mostrar el recorrido en inorden después de eliminar el nodo 30
-    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal2 << ": ";
-    arbol.inOrden();
+    arbol.nivelOrden();
     std::cout << std::endl;
 
-    // Eliminar un nodo hoja (por ejemplo, el 20)
-    if (arbol.eliminar(eliminarVal1)) {
-        std::cout << "Elemento " << eliminarVal1 << " eliminado del árbol." << std::endl;
-    } else {
-        std::cout << "Elemento " << eliminarVal1 << " no pudo ser eliminado." << std::endl;
+    int valorCaso = 15;
+    std::cout << "\nEliminando " << valorCaso << ": ";
+    arbol.eliminar(valorCaso);
+    arbol.nivelOrden();
+    std::cout << std::endl;
+
+
+    probarBusquedaPostEliminacion(arbol, valorCaso);
+}
+
+void pruebaCaso2Eliminacion() {
+    ArbolBinarioOrd<int> arbol;
+    std::cout << "Insertando elementos en el árbol binario ordenado:" << std::endl;
+    int elementosInsertar[] = {7, 3, 20, 15, 25, 30, 5, 4, 6, 0, -3, 1};
+    for (int i = 0; i < 12; i++) {
+        arbol.insertar(elementosInsertar[i]);
     }
-
-    // Mostrar el recorrido en inorden después de la segunda eliminación
-    std::cout << "Recorrido en inorden después de eliminar " << eliminarVal1 << ": ";
-    arbol.inOrden();
+    arbol.nivelOrden();
     std::cout << std::endl;
 
-    return 0;
+    int valorCaso = 25;
+    std::cout << "\nEliminando " << valorCaso << ": ";
+    arbol.eliminar(valorCaso);
+    arbol.nivelOrden();
+    std::cout << std::endl;
+
+    probarBusquedaPostEliminacion(arbol, valorCaso);
+}
+
+void pruebaCaso3Eliminacion() {
+    ArbolBinarioOrd<int> arbol;
+    std::cout << "Insertando elementos en el árbol binario ordenado:" << std::endl;
+    int elementosInsertar[] = {7, 3, 20, 15, 25, 30, 5, 4, 6, 0, -3, 1};
+    for (int i = 0; i < 12; i++) {
+        arbol.insertar(elementosInsertar[i]);
+    }
+    arbol.nivelOrden();
+    std::cout << std::endl;
+
+    int valorCaso = 3;
+    std::cout << "\nEliminando " << valorCaso << ": ";
+    arbol.eliminar(valorCaso);
+    arbol.nivelOrden();
+    std::cout << std::endl;
+
+    probarBusquedaPostEliminacion(arbol, valorCaso);
+}
+
+void probarBusquedaPostEliminacion(ArbolBinarioOrd<int>& arbol, int valor) {
+    std::cout << "Verificando si el valor " << valor << " fue eliminado: ";
+    if (arbol.buscar(valor)) {
+        std::cout << "Fallo, el valor aún está presente.";
+    } else {
+        std::cout << "Éxito, el valor no está presente.";
+    }
+    std::cout << std::endl;
+}
+
+void pruebaAlturaTamano() {
+    // Árbol grande
+    ArbolBinarioOrd<int> arbolGrande;
+    std::cout << "Insertando elementos en el árbol grande:" << std::endl;
+    int elementosGrande[] = {7, 3, 20, 15, 25, 30, 5, 4, 6, 0, -3, 1};
+    for (int i = 0; i < 12; i++) {
+        std::cout << "Insertando " << elementosGrande[i] << ": ";
+        arbolGrande.insertar(elementosGrande[i]);
+        arbolGrande.nivelOrden();
+        std::cout << std::endl;
+    }
+    int alturaEsperadaGrande = 4;  // Según la inserción esperada
+    std::cout << "Altura del árbol grande: " << arbolGrande.altura() << std::endl;
+    std::cout << "¿Altura correcta?: " << (arbolGrande.altura() == alturaEsperadaGrande ? "Sí" : "No") << std::endl;
+
+    // Árbol hoja
+    ArbolBinarioOrd<int> arbolHoja;
+    std::cout << "Insertando un único elemento en el árbol hoja:" << std::endl;
+    int elementoHoja = 10;
+    arbolHoja.insertar(elementoHoja);
+    std::cout << "Altura del árbol hoja: " << arbolHoja.altura() << std::endl;
+    std::cout << "¿Altura correcta?: " << (arbolHoja.altura() == 0 ? "Sí" : "No") << std::endl;
+
+    // Árbol vacío
+    ArbolBinarioOrd<int> arbolVacio;
+    std::cout << "Altura del árbol vacío: " << arbolVacio.altura() << std::endl;
+    std::cout << "¿Altura correcta?: " << (arbolVacio.altura() == -1 ? "Sí" : "No") << std::endl;
+
+    // Árbol mediano
+    ArbolBinarioOrd<int> arbolMediano;
+    std::cout << "Insertando elementos en el árbol mediano:" << std::endl;
+    int elementosMediano[] = {10, 5, 15, 3, 7, 12};
+    for (int i = 0; i < 6; i++) {
+        std::cout << "Insertando " << elementosMediano[i] << ": ";
+        arbolMediano.insertar(elementosMediano[i]);
+        arbolMediano.nivelOrden();
+        std::cout << std::endl;
+    }
+    int alturaEsperadaMediano = 2;  // Según la inserción esperada
+    std::cout << "Altura del árbol mediano: " << arbolMediano.altura() << std::endl;
+    std::cout << "¿Altura correcta?: " << (arbolMediano.altura() == alturaEsperadaMediano ? "Sí" : "No") << std::endl;
+
+    // Verificar el tamaño esperado
+    unsigned int tamanoEsperado = 12;  // Ya que se insertaron 12 elementos
+    bool tamanoCorrecto = arbolGrande.tamano() == tamanoEsperado;
+    std::cout << "Tamaño esperado: " << tamanoEsperado << std::endl;
+    std::cout << "Tamaño actual: " << arbolGrande.tamano() << std::endl;
+    std::cout << "¿Tamaño correcto?: " << (tamanoCorrecto ? "Sí" : "No") << std::endl;
 }

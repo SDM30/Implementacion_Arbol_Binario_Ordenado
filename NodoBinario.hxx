@@ -43,7 +43,7 @@ bool NodoBinario<T>::esHoja(){
 }
 
 template< class T >
-int NodoBinario<T>::altura(){
+int NodoBinario<T>::altura() {
 
     int valAlt;
     if (this->esHoja()){
