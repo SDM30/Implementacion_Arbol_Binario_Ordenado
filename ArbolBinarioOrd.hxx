@@ -26,15 +26,11 @@ T& ArbolBinarioOrd<T>::datoRaiz(){
 //Recursiva
 template < class T >
 int ArbolBinarioOrd<T>::altura(){
-
-    if (this->esVacio()){
+    if (this->esVacio()) {
         return -1;
-    } else if ((this->raiz)->esHoja()){
-        return 0;
-    } else {  
-        return (this->raiz)->altura() + 1;
+    } else {
+        return (this->raiz)->altura();
     }
-
 }
 
 //Recursiva

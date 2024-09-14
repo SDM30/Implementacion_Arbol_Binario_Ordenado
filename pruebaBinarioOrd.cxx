@@ -161,7 +161,7 @@ void pruebaAlturaTamano() {
         arbolGrande.nivelOrden();
         std::cout << std::endl;
     }
-    int alturaEsperadaGrande = 4;  // Según la inserción esperada
+    int alturaEsperadaGrande = 3;  // Según la inserción esperada
     std::cout << "Altura del árbol grande: " << arbolGrande.altura() << std::endl;
     std::cout << "¿Altura correcta?: " << (arbolGrande.altura() == alturaEsperadaGrande ? "Sí" : "No") << std::endl;
 
